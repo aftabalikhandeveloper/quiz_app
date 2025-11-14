@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Layout Wrapper -->
+    <div class="flex min-h-screen">
+
+        {% macro nav_item(endpoint, label) -%}
+            <li>
+            <a href="{{ url_for(endpoint) }}"
+                class="block px-4 py-2 rounded-lg {% if request.endpoint == endpoint or request.path == url_for(endpoint) %}bg-blue-600{% else %}hover:bg-blue-700{% endif %} transition">
+                {{ label }}
+            </a>
+            </li>
+{%- endmacro %}
+
+      <!-- Sidebar -->
+      <aside class="w-64 bg-blue-800 text-white p-6">
+        <h2 class="text-2xl font-bold mb-10 text-center tracking-wide">
+          Admin Panel
+        </h2>
+        <ul class="space-y-3">
+            {{ nav_item('admin', 'Admin') }}
+            {{ nav_item('teacher', 'Teachers') }}
+            {{ nav_item('subjects', 'Subjects') }}
+            {{ nav_item('classes', 'Classes') }}
+</ul>
+      </aside>
+
+
+        <!-- Main Content -->
+        {% block content %}{% endblock %}
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
+  </body>
+</html>

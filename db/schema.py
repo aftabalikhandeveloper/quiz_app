@@ -20,6 +20,21 @@ def create_tables():
             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );
 
+        CREATE TABLE IF NOT EXISTS subjects (
+            subject_id INT AUTO_INCREMENT PRIMARY KEY,
+            subject_name VARCHAR(100) UNIQUE NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        );
+
+
+        CREATE TABLE IF NOT EXISTS classes (
+            class_id INT AUTO_INCREMENT PRIMARY KEY,
+            class_name VARCHAR(100) NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        );
+
 
 
         """

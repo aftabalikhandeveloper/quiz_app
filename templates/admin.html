@@ -1,50 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teacher Management Panel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 font-sans">
-    <!-- Layout Wrapper -->
-    <div class="flex min-h-screen">
-      <!-- Sidebar -->
-      <aside class="w-64 bg-blue-800 text-white p-6">
-        <h2 class="text-2xl font-bold mb-10 text-center tracking-wide">
-          Admin Panel
-        </h2>
-        <ul class="space-y-3">
-          <li>
-            <a
-              href="#"
-              class="block px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition"
-              >Dashboard</a
-            >
-          </li>
-          <li>
-            <a
-              href="teacher.html"
-              class="block px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-              >Teachers</a
-            >
-          </li>
-          <li>
-            <a
-              href="subject.html"
-              class="block px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-              >Subjects</a
-            >
-          </li>
-          <li>
-            <a
-              href="class.html"
-              class="block px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-              >Classes</a
-            >
-          </li>
-        </ul>
-      </aside>
+{% extends "layouts.html" %}
+
+
+
+{% block title %}Admin Panel{% endblock %}
+
+
+
+
+
+{% block content %}
 
       <!-- Main Content -->
       <main class="flex-1 p-8">
@@ -90,7 +54,7 @@
             <h3 class="text-gray-600 text-lg font-semibold mb-2">
               Total Teachers
             </h3>
-            <p class="text-3xl font-bold text-blue-600">{{data_lenght}}</p>
+            <p class="text-3xl font-bold text-blue-600">{{teacher_data_len}}</p>
           </div>
           <div
             class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
@@ -98,7 +62,7 @@
             <h3 class="text-gray-600 text-lg font-semibold mb-2">
               Total Subjects
             </h3>
-            <p class="text-3xl font-bold text-green-600">24</p>
+            <p class="text-3xl font-bold text-green-600">{{subject_data_len}}</p>
           </div>
           <div
             class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
@@ -106,7 +70,7 @@
             <h3 class="text-gray-600 text-lg font-semibold mb-2">
               Total Classes
             </h3>
-            <p class="text-3xl font-bold text-yellow-600">8</p>
+            <p class="text-3xl font-bold text-yellow-600">{{class_data_len}}</p>
           </div>
         </div>
 
@@ -123,7 +87,7 @@
               </tr>
             </thead>
             <tbody>
-              {{teachers}}
+             {#   {{teachers}} #}
              {% for teacher in teachers:%}
               <tr class="border-b hover:bg-gray-50">
                 <td class="py-3 px-4">{{teacher[1]}}</td>
@@ -206,10 +170,10 @@
 
       <!-- Modal body -->
       <div class="p-6 space-y-6">
-        <form action="">
+        <form action="/subject/add" method="post">
           <div class="mb-4">
             <label for="subjectName" class="block text  -gray-700 font-medium mb-2">Subject Name</label>
-            <input type="text" id="subjectName" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter subject name">
+            <input type="text" id="subjectName" name="name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter subject name">
           </div>
           <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Subject</button>
         </form>
@@ -238,10 +202,10 @@
 
       <!-- Modal body -->
       <div class="p-6 space-y-6">
-        <form action="">
+        <form action="{{ url_for('add_class') }}" method="post">
           <div class="mb-4">
             <label for="className" class="block text-gray-700 font-medium mb-2">Class Name</label>
-            <input type="text" id="className" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter class name">
+            <input type="text" id="className" name="name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter class name">
           </div>
           <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add Class</button>
         </form>
@@ -252,7 +216,7 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+   
 
-  </body>
-</html>
+{% endblock %}
+
