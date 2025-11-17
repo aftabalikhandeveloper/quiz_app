@@ -32,8 +32,14 @@ def admin():
     return render_template("admin.html", teachers=teacher_data, teacher_data_len=teacher_data_len, subject_data_len=subject_data_len, class_data_len=class_data_len)
 
 
-
 # all about teachers
+
+
+
+@app.route("/teacher/<t_id>/createquiz")
+def create_quiz(t_id):
+    return render_template("teacher/createquiz.html", teacher_id=t_id)
+
 
 @app.route("/teachers")
 def teacher():
@@ -81,10 +87,28 @@ def delete_teacher(t_id):
     return "id is not correct or something else"
 
 
+@app.route("/teacher/update/<t_id>", methods=["POST"])
+def update_teacher(t_id):
+    if t_id != "":
+        teacher_name = request.form["name"]
+        teacher_education = request.form["education"]
+        conn = get_connection()
+        cur = conn.cursor()
+        sql_query = "UPDATE teachers SET name=%s, education=%s WHERE teacher_id=%s"
+        data = (teacher_name, teacher_education, t_id)
+        cur.execute(sql_query,data)
+        conn.commit()
+        cur.close()
+        return "teacher has been updated"
+    return "id is not correct or something else"
+
+
+
+
+
 
 
 # all about subjects
-
 @app.route("/subjects")
 def subjects():
     conn = get_connection()
@@ -131,6 +155,8 @@ def delete_subject(s_id):
 
 
 
+
+
 # all about class
 
 @app.route("/classes")
@@ -170,6 +196,16 @@ def delete_class(c_id):
         cur.close()
         return "class has been deleted"
     return "id is not correct or something else"
+
+
+
+
+
+# teacher subjects
+
+@app.route("/teacher-subjects")
+def teacher_subjects():
+    return render_template("teacher_subjects.html")    
 
 if __name__ == "__main__":
     print(create_tables())
