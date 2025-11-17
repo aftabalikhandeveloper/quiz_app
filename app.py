@@ -207,6 +207,13 @@ def delete_class(c_id):
 def teacher_subjects():
     return render_template("teacher_subjects.html")    
 
+
+
+@app.route("/manage-class")
+def manage_class():
+    return render_template("manage_class.html")
+
+
 if __name__ == "__main__":
     print(create_tables())
-    app.run(debug=True, port=3001)
+    app.run(debug=True)
