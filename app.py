@@ -208,7 +208,7 @@ def teacher_subjects():
     return render_template("teacher_subjects.html")    
 
 
-
+# manging class etc
 @app.route("/manage-class")
 def manage_class():
     return render_template("manage_class.html")
